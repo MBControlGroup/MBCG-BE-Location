@@ -5,76 +5,105 @@ HOST: http://polls.apiblueprint.org/
 
 Polls is a simple API allowing consumers to view polls and vote in them.
 
-## Questions Collection [/questions]
+## Manage Location Info [/loc]
 
-### List All Questions [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Get all Locations [POST /loc/getAllLocs]
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
     + Headers
+            
+            Cookies: token="abcd"
+            
+    + Body 
+    
+            {
+                "task_id": 1,
+                "pc": 2,
+                "pn": 1
+            }
 
-            Location: /questions/2
++ Response 200 (application/json)
 
     + Body
-
+    
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "code":200,
+                "enmsg":"ok",
+                "cnmsg":"成功",
+                "data": {
+                    "count_page": 1,
+                    "count_data": 2,
+                    "data": [
+                        {
+                            "soldier_id":1,
+                            "name": "张三",
+                            "phone": 13600000000,
+                            "serve_office": "海珠人武部",
+                            "longitude":111.00,
+                            "latitude":111.13
+                        },{
+                            "soldier_id":2,
+                            "name": "李四",
+                            "phone": 13600000000,
+                            "serve_office": "海珠人武部",
+                            "longitude":112.18,
+                            "latitude":111.19
+                        }
+                    ]
+                }
+            }
+
+### Get Someone Location [POST /loc/getOneLocs]
+
++ Request (application/json)
+
+    + Headers
+            
+            Cookies: token="abcd"
+            
+    + Body 
+    
+            {
+                "task_id": 1,
+                "soldier_id": 1,
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "code":200,
+                "enmsg":"ok",
+                "cnmsg":"成功",
+                "longitude":112.18,
+                "latitude":111.19
+            }
+            
+### Update Someone Location [POST /loc/upOneLocs]
+
++ Request (application/json)
+
+    + Headers
+            
+            Cookies: token="abcd"
+            
+    + Body 
+    
+            {
+                "task_id": 1,
+                "soldier_id": 1,
+                "longitude": 112.18,
+                "latitude": 111.19
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "code":200,
+                "enmsg":"ok",
+                "cnmsg":"成功"
             }
