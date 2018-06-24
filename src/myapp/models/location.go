@@ -10,14 +10,6 @@ type Location struct {
 var allLocations []Location;
 
 func init(){
-	loc1 := Location{5,1,1.1,1.1};
-	loc2 := Location{5,2,1.1,1.1};
-	loc3 := Location{1,1,1.1,1.1};
-	loc4 := Location{1,2,1.1,1.1};
-	allLocations = append(allLocations, loc1);
-	allLocations = append(allLocations, loc2);
-	allLocations = append(allLocations, loc3);
-	allLocations = append(allLocations, loc4);
 }
 
 func GetAllLocations(id int) ([]*Location,bool) {
