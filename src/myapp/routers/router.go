@@ -14,23 +14,12 @@ import (
 )
 
 func init() {
-	ns := beego.NewNamespace("/loc",
-		// beego.NSNamespace("/object",
-		// 	beego.NSInclude(
-		// 		&controllers.ObjectController{},
-		// 	),
-		// ),
-		// beego.NSNamespace("/user",
-		// 	beego.NSInclude(
-		// 		&controllers.UserController{},
-		// 	),
-		// ),
-	beego.NSNamespace("/location", 
+	ns := beego.NewNamespace("/mbgc",
+	beego.NSNamespace("/loc", 
 			beego.NSInclude( 
 				&controllers.LocationController{}, 
 			), 
 	),
 	)
 	beego.AddNamespace(ns)
-	//beego.Router("/loc",&LocationController{})
 }

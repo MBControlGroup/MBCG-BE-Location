@@ -9,12 +9,12 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-basePath: /loc
+basePath: /mbgc
 paths:
-  /location/:
-    get:
+  /loc/getAllLocs:
+    post:
       tags:
-      - location
+      - loc
       description: 返回所有的地址数据
       operationId: LocationController.获得所有地址
       responses:
@@ -22,44 +22,10 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Location'
-    put:
-      tags:
-      - location
-      description: 修改地址的内容
-      operationId: LocationController.修改地址
-      parameters:
-      - in: body
-        name: body
-        description: body for location content
-        required: true
-        schema:
-          $ref: '#/definitions/models.Location'
-      responses:
-        "200":
-          description: '{int} models.Location'
-        "403":
-          description: body is empty
+  /loc/getOneLocs:
     post:
       tags:
-      - location
-      description: 创建地址的描述
-      operationId: LocationController.创建地址
-      parameters:
-      - in: body
-        name: body
-        description: body for location content
-        required: true
-        schema:
-          $ref: '#/definitions/models.Location'
-      responses:
-        "200":
-          description: '{int} models.Location.Id'
-        "403":
-          description: body is empty
-  /location/{id}:
-    get:
-      tags:
-      - location
+      - loc
       description: 返回某地址数据
       operationId: LocationController.获得一个地址
       parameters:
@@ -74,24 +40,39 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Location'
+  /loc/upOneLocs:
+    post:
+      tags:
+      - loc
+      description: 修改地址的内容
+      operationId: LocationController.有则改之，无则建之
+      parameters:
+      - in: body
+        name: body
+        description: body for location content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Location'
+      responses:
+        "200":
+          description: '{int} models.Location'
+        "403":
+          description: body is empty
 definitions:
   models.Location:
     title: Location
     type: object
     properties:
-      Id:
-        type: integer
-        format: int64
-      Latitude:
+      latitude:
         type: number
         format: double
-      Longitude:
+      longitude:
         type: number
         format: double
-      Soldier_id:
+      soldier:
         type: integer
         format: int64
-      Task_id:
+      task_id:
         type: integer
         format: int64
   models.Object:
