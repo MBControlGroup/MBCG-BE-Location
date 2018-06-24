@@ -10,15 +10,15 @@ func init() {
 	beego.GlobalControllerRouter["myapp/controllers:LocationController"] = append(beego.GlobalControllerRouter["myapp/controllers:LocationController"],
 		beego.ControllerComments{
 			Method: "GetAll",
-			Router: `/`,
-			AllowHTTPMethods: []string{"get"},
+			Router: `/getAllLocs`,
+			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
 
 	beego.GlobalControllerRouter["myapp/controllers:LocationController"] = append(beego.GlobalControllerRouter["myapp/controllers:LocationController"],
 		beego.ControllerComments{
-			Method: "Post",
-			Router: `/`,
+			Method: "GetById",
+			Router: `/getOneLocs`,
 			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
@@ -26,16 +26,8 @@ func init() {
 	beego.GlobalControllerRouter["myapp/controllers:LocationController"] = append(beego.GlobalControllerRouter["myapp/controllers:LocationController"],
 		beego.ControllerComments{
 			Method: "Update",
-			Router: `/`,
-			AllowHTTPMethods: []string{"put"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["myapp/controllers:LocationController"] = append(beego.GlobalControllerRouter["myapp/controllers:LocationController"],
-		beego.ControllerComments{
-			Method: "GetById",
-			Router: `/:id`,
-			AllowHTTPMethods: []string{"get"},
+			Router: `/upOneLocs`,
+			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
 
