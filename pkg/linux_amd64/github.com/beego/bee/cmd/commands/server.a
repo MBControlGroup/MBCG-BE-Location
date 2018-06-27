@@ -1,208 +1,0 @@
-!<arch>
-__.PKGDEF       0           0     0     644     21485     `
-go object linux amd64 go1.6.2 X:none
-build id "68e2513e8d3ef3bdf12ba4894962e1b26976da45"
-
-$$
-package apiapp
-	import http "net/http"
-	import os "os"
-	import beeLogger "github.com/beego/bee/logger"
-	import commands "github.com/beego/bee/cmd/commands"
-	import utils "github.com/beego/bee/utils"
-	import version "github.com/beego/bee/cmd/commands/version"
-	import flag "flag" // indirect
-	type @"flag".Value interface { Set(? string) (? error); String() (? string) }
-	type @"flag".Flag struct { Name string; Usage string; Value @"flag".Value; DefValue string }
-	type @"flag".ErrorHandling int
-	import io "io" // indirect
-	type @"io".Writer interface { Write(@"io".p []byte) (@"io".n int, @"io".err error) }
-	import time "time" // indirect
-	type @"time".Duration int64
-	func (@"time".dÂ·2 @"time".Duration) Hours () (? float64) { var @"time".hourÂ·3 @"time".Duration; ; @"time".hourÂ·3 = @"time".dÂ·2 / @"time".Duration(0x34630b8a000); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x34630b8a000); return float64(@"time".hourÂ·3) + float64(@"time".nsecÂ·4) * float64(8190022623310637111963488201822504381538623676021880892417778544696899264837610290203272971060556344039023584360473938041055625214280336402169897364226048p-553) }
-	func (@"time".dÂ·2 @"time".Duration) Minutes () (? float64) { var @"time".minÂ·3 @"time".Duration; ; @"time".minÂ·3 = @"time".dÂ·2 / @"time".Duration(0xdf8475800); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0xdf8475800); return float64(@"time".minÂ·3) + float64(@"time".nsecÂ·4) * float64(7678146209353722106395056769533233877065564876941352542109479049699919628723768656821910653339403201031675627614471533358284117434246264392176261853609984p-547) }
-	func (@"time".dÂ·2 @"time".Duration) Nanoseconds () (? int64) { return int64(@"time".dÂ·2) }
-	func (@"time".dÂ·2 @"time".Duration) Seconds () (? float64) { var @"time".secÂ·3 @"time".Duration; ; @"time".secÂ·3 = @"time".dÂ·2 / @"time".Duration(0x3b9aca00); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x3b9aca00); return float64(@"time".secÂ·3) + float64(@"time".nsecÂ·4) * float64(7198262071269114660816079141112770740375861891461678802759824945047098083990024106014198994535558872472104883612039846078596891298747423852523262413111296p-541) }
-	func (@"time".dÂ·2 @"time".Duration) String () (? string)
-	type @"flag".FlagSet struct { Usage func(); @"flag".name string; @"flag".parsed bool; @"flag".actual map[string]*@"flag".Flag; @"flag".formal map[string]*@"flag".Flag; @"flag".args []string; @"flag".errorHandling @"flag".ErrorHandling; @"flag".output @"io".Writer }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x32") Arg (@"flag".iÂ·3 int) (? string) { if @"flag".iÂ·3 < int(0x0) || @"flag".iÂ·3 >= len(@"flag".fÂ·2.@"flag".args) { return string("") }; return @"flag".fÂ·2.@"flag".args[@"flag".iÂ·3] }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x22") Args () (? []string) { return @"flag".fÂ·2.@"flag".args }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Bool (@"flag".nameÂ·3 string, @"flag".valueÂ·4 bool, @"flag".usageÂ·5 string) (? *bool)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") BoolVar (@"flag".pÂ·2 *bool, @"flag".nameÂ·3 string, @"flag".valueÂ·4 bool, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Duration (@"flag".nameÂ·3 string, @"flag".valueÂ·4 @"time".Duration, @"flag".usageÂ·5 string) (? *@"time".Duration)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") DurationVar (@"flag".pÂ·2 *@"time".Duration, @"flag".nameÂ·3 string, @"flag".valueÂ·4 @"time".Duration, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Float64 (@"flag".nameÂ·3 string, @"flag".valueÂ·4 float64, @"flag".usageÂ·5 string) (? *float64)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") Float64Var (@"flag".pÂ·2 *float64, @"flag".nameÂ·3 string, @"flag".valueÂ·4 float64, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x1") Init (@"flag".nameÂ·2 string, @"flag".errorHandlingÂ·3 @"flag".ErrorHandling) { @"flag".fÂ·1.@"flag".name = @"flag".nameÂ·2; @"flag".fÂ·1.@"flag".errorHandling = @"flag".errorHandlingÂ·3 }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Int (@"flag".nameÂ·3 string, @"flag".valueÂ·4 int, @"flag".usageÂ·5 string) (? *int)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Int64 (@"flag".nameÂ·3 string, @"flag".valueÂ·4 int64, @"flag".usageÂ·5 string) (? *int64)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") Int64Var (@"flag".pÂ·2 *int64, @"flag".nameÂ·3 string, @"flag".valueÂ·4 int64, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") IntVar (@"flag".pÂ·2 *int, @"flag".nameÂ·3 string, @"flag".valueÂ·4 int, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x1") Lookup (@"flag".nameÂ·3 string "esc:0x1") (? *@"flag".Flag) { return @"flag".fÂ·2.@"flag".formal[@"flag".nameÂ·3] }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x1") NArg () (? int) { return len(@"flag".fÂ·2.@"flag".args) }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x1") NFlag () (? int) { return len(@"flag".fÂ·2.@"flag".actual) }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Parse (@"flag".argumentsÂ·3 []string) (? error)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x1") Parsed () (? bool) { return @"flag".fÂ·2.@"flag".parsed }
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") PrintDefaults ()
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x1") Set (@"flag".nameÂ·3 string, @"flag".valueÂ·4 string) (? error)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x1") SetOutput (@"flag".outputÂ·2 @"io".Writer) { @"flag".fÂ·1.@"flag".output = @"flag".outputÂ·2 }
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") String (@"flag".nameÂ·3 string, @"flag".valueÂ·4 string, @"flag".usageÂ·5 string) (? *string)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") StringVar (@"flag".pÂ·2 *string, @"flag".nameÂ·3 string, @"flag".valueÂ·4 string, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Uint (@"flag".nameÂ·3 string, @"flag".valueÂ·4 uint, @"flag".usageÂ·5 string) (? *uint)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") Uint64 (@"flag".nameÂ·3 string, @"flag".valueÂ·4 uint64, @"flag".usageÂ·5 string) (? *uint64)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") Uint64Var (@"flag".pÂ·2 *uint64, @"flag".nameÂ·3 string, @"flag".valueÂ·4 uint64, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") UintVar (@"flag".pÂ·2 *uint, @"flag".nameÂ·3 string, @"flag".valueÂ·4 uint, @"flag".usageÂ·5 string)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") Var (@"flag".valueÂ·2 @"flag".Value, @"flag".nameÂ·3 string, @"flag".usageÂ·4 string)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") Visit (@"flag".fnÂ·2 func(? *@"flag".Flag) "esc:0x1")
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") VisitAll (@"flag".fnÂ·2 func(? *@"flag".Flag) "esc:0x1")
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x9") @"flag".failf (@"flag".formatÂ·3 string "esc:0x9", @"flag".aÂ·4 ...interface {} "esc:0x9") (? error)
-	func (@"flag".fÂ·2 *@"flag".FlagSet "esc:0x22") @"flag".out () (? @"io".Writer) { if @"flag".fÂ·2.@"flag".output == nil { return @"os".Stderr }; return @"flag".fÂ·2.@"flag".output }
-	func (@"flag".fÂ·3 *@"flag".FlagSet "esc:0x9") @"flag".parseOne () (? bool, ? error)
-	func (@"flag".fÂ·1 *@"flag".FlagSet "esc:0x9") @"flag".usage ()
-	type @"github.com/beego/bee/cmd/commands".Command struct { Run func(@"github.com/beego/bee/cmd/commands".cmd *@"github.com/beego/bee/cmd/commands".Command, @"github.com/beego/bee/cmd/commands".args []string) (? int); PreRun func(@"github.com/beego/bee/cmd/commands".cmd *@"github.com/beego/bee/cmd/commands".Command, @"github.com/beego/bee/cmd/commands".args []string); UsageLine string; Short string; Long string; Flag @"flag".FlagSet; CustomFlags bool; @"github.com/beego/bee/cmd/commands".output *@"io".Writer }
-	func (@"github.com/beego/bee/cmd/commands".cÂ·2 *@"github.com/beego/bee/cmd/commands".Command "esc:0x2a") Name () (? string)
-	func (@"github.com/beego/bee/cmd/commands".cÂ·2 *@"github.com/beego/bee/cmd/commands".Command "esc:0x9") Options () (? map[string]string)
-	func (@"github.com/beego/bee/cmd/commands".cÂ·2 *@"github.com/beego/bee/cmd/commands".Command "esc:0x32") Out () (? @"io".Writer) { if @"github.com/beego/bee/cmd/commands".cÂ·2.@"github.com/beego/bee/cmd/commands".output != nil { return *@"github.com/beego/bee/cmd/commands".cÂ·2.@"github.com/beego/bee/cmd/commands".output }; return @"github.com/beego/bee/logger/colors".NewColorWriter(@"os".Stderr) }
-	func (@"github.com/beego/bee/cmd/commands".cÂ·2 *@"github.com/beego/bee/cmd/commands".Command "esc:0x1") Runnable () (? bool) { return @"github.com/beego/bee/cmd/commands".cÂ·2.Run != nil }
-	func (@"github.com/beego/bee/cmd/commands".cÂ·1 *@"github.com/beego/bee/cmd/commands".Command "esc:0x1") SetOutput (@"github.com/beego/bee/cmd/commands".outputÂ·2 @"io".Writer) { @"github.com/beego/bee/cmd/commands".cÂ·1.@"github.com/beego/bee/cmd/commands".output = &@"github.com/beego/bee/cmd/commands".outputÂ·2 }
-	func (@"github.com/beego/bee/cmd/commands".cÂ·1 *@"github.com/beego/bee/cmd/commands".Command) Usage ()
-	var @"".CmdServer *@"github.com/beego/bee/cmd/commands".Command
-	func @"".init ()
-	type @"os".dirInfo struct { @"os".buf []byte; @"os".nbuf int; @"os".bufp int }
-	type @"os".file struct { @"os".fd int; @"os".name string; @"os".dirinfo *@"os".dirInfo }
-	func (@"os".fileÂ·2 *@"os".file) @"os".close () (? error)
-	type @"os".FileMode uint32
-	func (@"os".mÂ·2 @"os".FileMode) IsDir () (? bool) { return @"os".mÂ·2 & @"os".FileMode(0x80000000) != @"os".FileMode(0x0) }
-	func (@"os".mÂ·2 @"os".FileMode) IsRegular () (? bool) { return @"os".mÂ·2 & @"os".FileMode(0x8f000000) == @"os".FileMode(0x0) }
-	func (@"os".mÂ·2 @"os".FileMode) Perm () (? @"os".FileMode) { return @"os".mÂ·2 & @"os".FileMode(0x1ff) }
-	func (@"os".mÂ·2 @"os".FileMode) String () (? string)
-	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }
-	type @"time".zoneTrans struct { @"time".when int64; @"time".index uint8; @"time".isstd bool; @"time".isutc bool }
-	type @"time".Location struct { @"time".name string; @"time".zone []@"time".zone; @"time".tx []@"time".zoneTrans; @"time".cacheStart int64; @"time".cacheEnd int64; @"time".cacheZone *@"time".zone }
-	func (@"time".lÂ·2 *@"time".Location "esc:0x22") String () (? string)
-	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".firstZoneUsed () (? bool)
-	func (@"time".lÂ·2 *@"time".Location "esc:0x12") @"time".get () (? *@"time".Location)
-	func (@"time".lÂ·6 *@"time".Location "esc:0x32") @"time".lookup (@"time".secÂ·7 int64) (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".isDSTÂ·3 bool, @"time".startÂ·4 int64, @"time".endÂ·5 int64)
-	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".lookupFirstZone () (? int)
-	func (@"time".lÂ·4 *@"time".Location "esc:0x1") @"time".lookupName (@"time".nameÂ·5 string "esc:0x1", @"time".unixÂ·6 int64) (@"time".offsetÂ·1 int, @"time".isDSTÂ·2 bool, @"time".okÂ·3 bool)
-	type @"time".Month int
-	func (@"time".mÂ·2 @"time".Month) String () (? string) { return @"time".months[@"time".mÂ·2 - @"time".Month(0x1)] }
-	type @"time".Weekday int
-	func (@"time".dÂ·2 @"time".Weekday) String () (? string) { return @"time".days[@"time".dÂ·2] }
-	type @"time".Time struct { @"time".sec int64; @"time".nsec int32; @"time".loc *@"time".Location }
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") Add (@"time".dÂ·3 @"time".Duration) (? @"time".Time) { @"time".tÂ·2.@"time".sec += int64(@"time".dÂ·3 / @"time".Duration(0x3b9aca00)); var @"time".nsecÂ·4 int32; ; @"time".nsecÂ·4 = int32(@"time".tÂ·2.@"time".nsec) + int32(@"time".dÂ·3 % @"time".Duration(0x3b9aca00)); if @"time".nsecÂ·4 >= int32(0x3b9aca00) { @"time".tÂ·2.@"time".sec++; @"time".nsecÂ·4 -= int32(0x3b9aca00) } else { if @"time".nsecÂ·4 < int32(0x0) { @"time".tÂ·2.@"time".sec--; @"time".nsecÂ·4 += int32(0x3b9aca00) } }; @"time".tÂ·2.@"time".nsec = @"time".nsecÂ·4; return @"time".tÂ·2 }
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") AddDate (@"time".yearsÂ·3 int, @"time".monthsÂ·4 int, @"time".daysÂ·5 int) (? @"time".Time)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") After (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec > @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec > @"time".uÂ·3.@"time".nsec }
-	func (@"time".tÂ·2 @"time".Time "esc:0x9") AppendFormat (@"time".bÂ·3 []byte "esc:0x1a", @"time".layoutÂ·4 string "esc:0x9") (? []byte)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Before (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec < @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec < @"time".uÂ·3.@"time".nsec }
-	func (@"time".tÂ·4 @"time".Time "esc:0x1") Clock () (@"time".hourÂ·1 int, @"time".minÂ·2 int, @"time".secÂ·3 int)
-	func (@"time".tÂ·4 @"time".Time "esc:0x1") Date () (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Day () (? int)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Equal (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec == @"time".uÂ·3.@"time".nsec }
-	func (@"time".tÂ·2 @"time".Time "esc:0x9") Format (@"time".layoutÂ·3 string "esc:0x9") (? string)
-	func (@"time".tÂ·2 *@"time".Time "esc:0x1") GobDecode (@"time".dataÂ·3 []byte "esc:0x1") (? error)
-	func (@"time".tÂ·3 @"time".Time "esc:0x1") GobEncode () (? []byte, ? error)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Hour () (? int)
-	func (@"time".tÂ·3 @"time".Time "esc:0x1") ISOWeek () (@"time".yearÂ·1 int, @"time".weekÂ·2 int)
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") In (@"time".locÂ·3 *@"time".Location "esc:0x12") (? @"time".Time)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") IsZero () (? bool) { return @"time".tÂ·2.@"time".sec == int64(0x0) && @"time".tÂ·2.@"time".nsec == int32(0x0) }
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") Local () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".Local; return @"time".tÂ·2 }
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") Location () (? *@"time".Location) { var @"time".lÂ·3 *@"time".Location; ; @"time".lÂ·3 = @"time".tÂ·2.@"time".loc; if @"time".lÂ·3 == nil { @"time".lÂ·3 = @"time".UTC }; return @"time".lÂ·3 }
-	func (@"time".tÂ·3 @"time".Time "esc:0x1") MarshalBinary () (? []byte, ? error)
-	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalJSON () (? []byte, ? error)
-	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalText () (? []byte, ? error)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Minute () (? int)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Month () (? @"time".Month)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Nanosecond () (? int) { return int(@"time".tÂ·2.@"time".nsec) }
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") Round (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Second () (? int)
-	func (@"time".tÂ·2 @"time".Time "esc:0x9") String () (? string)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Sub (@"time".uÂ·3 @"time".Time "esc:0x1") (? @"time".Duration)
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") Truncate (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
-	func (@"time".tÂ·2 @"time".Time "esc:0x12") UTC () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".UTC; return @"time".tÂ·2 }
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Unix () (? int64) { return @"time".tÂ·2.@"time".sec + int64(-0xe7791f700) }
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") UnixNano () (? int64) { return (@"time".tÂ·2.@"time".sec + int64(-0xe7791f700)) * int64(0x3b9aca00) + int64(@"time".tÂ·2.@"time".nsec) }
-	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalBinary (@"time".dataÂ·3 []byte "esc:0x1") (? error)
-	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalJSON (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
-	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalText (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Weekday () (? @"time".Weekday)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") Year () (? int)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") YearDay () (? int)
-	func (@"time".tÂ·3 @"time".Time "esc:0x32") Zone () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int)
-	func (@"time".tÂ·2 @"time".Time "esc:0x1") @"time".abs () (? uint64)
-	func (@"time".tÂ·5 @"time".Time "esc:0x1") @"time".date (@"time".fullÂ·6 bool) (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int, @"time".ydayÂ·4 int)
-	func (@"time".tÂ·4 @"time".Time "esc:0x32") @"time".locabs () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".absÂ·3 uint64)
-	type @"os".FileInfo interface { IsDir() (? bool); ModTime() (? @"time".Time); Mode() (? @"os".FileMode); Name() (? string); Size() (? int64); Sys() (? interface {}) }
-	type @"os".File struct { @"os".? *@"os".file }
-	func (@"os".fÂ·2 *@"os".File "esc:0x22") Chdir () (? error)
-	func (@"os".fÂ·2 *@"os".File "esc:0x22") Chmod (@"os".modeÂ·3 @"os".FileMode) (? error)
-	func (@"os".fÂ·2 *@"os".File "esc:0x22") Chown (@"os".uidÂ·3 int, @"os".gidÂ·4 int) (? error)
-	func (@"os".fÂ·2 *@"os".File "esc:0x9") Close () (? error)
-	func (@"os".fÂ·2 *@"os".File "esc:0x1") Fd () (? uintptr) { if @"os".fÂ·2 == nil { return uintptr(0xffffffffffffffff) }; return uintptr(@"os".fÂ·2.@"os".file.@"os".fd) }
-	func (@"os".fÂ·2 *@"os".File "esc:0x32") Name () (? string) { return @"os".fÂ·2.@"os".file.@"os".name }
-	func (@"os".fÂ·3 *@"os".File "esc:0x102") Read (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x102") ReadAt (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") Readdir (@"os".nÂ·4 int) (@"os".fiÂ·1 []@"os".FileInfo, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") Readdirnames (@"os".nÂ·4 int) (@"os".namesÂ·1 []string, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x102") Seek (@"os".offsetÂ·4 int64, @"os".whenceÂ·5 int) (@"os".retÂ·1 int64, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x10a") Stat () (? @"os".FileInfo, ? error)
-	func (@"os".fÂ·2 *@"os".File "esc:0x1") Sync () (? error)
-	func (@"os".fÂ·2 *@"os".File "esc:0x22") Truncate (@"os".sizeÂ·3 int64) (? error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x102") Write (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x102") WriteAt (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x102") WriteString (@"os".sÂ·4 string "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".pread (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".pwrite (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".read (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".readdir (@"os".nÂ·4 int) (@"os".fiÂ·1 []@"os".FileInfo, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".readdirnames (@"os".nÂ·4 int) (@"os".namesÂ·1 []string, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".seek (@"os".offsetÂ·4 int64, @"os".whenceÂ·5 int) (@"os".retÂ·1 int64, @"os".errÂ·2 error)
-	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".write (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
-	var @"os".Stderr *@"os".File
-	import colors "github.com/beego/bee/logger/colors" // indirect
-	func @"github.com/beego/bee/logger/colors".NewColorWriter (@"github.com/beego/bee/logger/colors".wÂ·2 @"io".Writer) (? @"io".Writer) { return @"github.com/beego/bee/logger/colors".NewModeColorWriter(@"github.com/beego/bee/logger/colors".wÂ·2, @"github.com/beego/bee/logger/colors".outputMode(0x1)) }
-	var @"time".months [12]string
-	var @"time".days [7]string
-	var @"time".Local *@"time".Location
-	var @"time".UTC *@"time".Location
-	type @"github.com/beego/bee/logger/colors".outputMode int
-	func @"github.com/beego/bee/logger/colors".NewModeColorWriter (@"github.com/beego/bee/logger/colors".wÂ·2 @"io".Writer, @"github.com/beego/bee/logger/colors".modeÂ·3 @"github.com/beego/bee/logger/colors".outputMode) (? @"io".Writer) { var @"github.com/beego/bee/logger/colors".okÂ·4 bool; ; _, @"github.com/beego/bee/logger/colors".okÂ·4 = @"github.com/beego/bee/logger/colors".wÂ·2.(*@"github.com/beego/bee/logger/colors".colorWriter); if !@"github.com/beego/bee/logger/colors".okÂ·4 { return (&@"github.com/beego/bee/logger/colors".colorWriter{ @"github.com/beego/bee/logger/colors".w:@"github.com/beego/bee/logger/colors".wÂ·2, @"github.com/beego/bee/logger/colors".mode:@"github.com/beego/bee/logger/colors".modeÂ·3 }) }; return @"github.com/beego/bee/logger/colors".wÂ·2 }
-	type @"github.com/beego/bee/logger/colors".colorWriter struct { @"github.com/beego/bee/logger/colors".w @"io".Writer; @"github.com/beego/bee/logger/colors".mode @"github.com/beego/bee/logger/colors".outputMode }
-	func (@"github.com/beego/bee/logger/colors".cwÂ·3 *@"github.com/beego/bee/logger/colors".colorWriter "esc:0x9") Write (@"github.com/beego/bee/logger/colors".pÂ·4 []byte) (? int, ? error)
-
-$$
- _go_.o          0           0     0     644     19538     `
-go object linux amd64 go1.6.2 X:none
-
-!
-  go13ldnet/http.a:github.com/beego/bee/logger.aos.aFgithub.com/beego/bee/cmd/commands.aVgithub.com/beego/bee/cmd/commands/version.a8github.com/beego/bee/utils.a ş"".init.1  €  €dH‹%    H;a†  HƒìhH    H‰\$PH‹    1íH9è„Ê  H‹    H‰$Hƒ<$ „¨  Hƒ$@H‹L$PH‰D$XH‰D$H‰L$`H‰L$H    H‰\$HÇD$    H    H‰\$(HÇD$0   è    H    H‰\$PH‹    1íH9è„  H‹    H‰$Hƒ<$ „é  Hƒ$@H‹L$PH‰D$XH‰D$H‰L$`H‰L$H    H‰\$HÇD$    H    H‰\$(HÇD$0   è    H    H‰\$PH‹    1íH9è„L  H‹    H‰$Hƒ<$ „*  Hƒ$@H‹L$PH‰D$XH‰D$H‰L$`H‰L$H    H‰\$HÇD$    H    H‰\$(HÇD$0   è    H‹    H‹    H‹    H‰ÃHÿÃH9Ëw3H‰    HÂH‹-    €=     uH‰+HƒÄhÃH‰$H‰l$è    ëëH-    H‰,$H‰T$H‰D$H‰L$H‰\$ è    H‹T$(H‹D$0H‹L$8H‰ÃH‰D$@HÿÃH‰    H‰    H‰T$H€=     uH‰    énÿÿÿH-    H‰,$H‰T$è    H‹T$HH‹D$@éJÿÿÿ‰%    éÊşÿÿH    H‰$H    H‰\$H    H‰\$è    H‹D$é‚şÿÿ‰%    éşÿÿH    H‰$H    H‰\$H    H‰\$è    H‹D$éÃıÿÿ‰%    éLıÿÿH    H‰$H    H‰\$H    H‰\$è    H‹D$éıÿÿè    éÅüÿÿÌÌÌÌÌ^
-      4  "".a   L  ngo.itab.*github.com/beego/bee/utils.DocValue.flag.Value   p  "".CmdServer   Ø  go.string."a"   ‚  4go.string."Listen address"   ¨  &flag.(*FlagSet).Var   ¶  "".p   Î  ngo.itab.*github.com/beego/bee/utils.DocValue.flag.Value   ò  "".CmdServer   Ú  go.string."p"   „  .go.string."Listen port"   ª  &flag.(*FlagSet).Var   ¸  "".f   Ğ  ngo.itab.*github.com/beego/bee/utils.DocValue.flag.Value   ô  "".CmdServer   Ü  go.string."f"   †  :go.string."Static files fold"   ¬  &flag.(*FlagSet).Var   º  fgithub.com/beego/bee/cmd/commands.AvailableCommands   È fgithub.com/beego/bee/cmd/commands.AvailableCommands   Ö  fgithub.com/beego/bee/cmd/commands.AvailableCommands   ú fgithub.com/beego/bee/cmd/commands.AvailableCommands     "".CmdServer   œ (runtime.writeBarrier   Î  .runtime.writebarrierptr   à  btype.[]*github.com/beego/bee/cmd/commands.Command   š  "runtime.growslice   Ü fgithub.com/beego/bee/cmd/commands.AvailableCommands   ê  fgithub.com/beego/bee/cmd/commands.AvailableCommands   €	 (runtime.writeBarrier   ”	  fgithub.com/beego/bee/cmd/commands.AvailableCommands   ¬	  fgithub.com/beego/bee/cmd/commands.AvailableCommands   È	  .runtime.writebarrierptr   Œ
-  Rtype.*github.com/beego/bee/utils.DocValue   ¢
-  type.flag.Value   º
-  ngo.itab.*github.com/beego/bee/utils.DocValue.flag.Value   Î
-   runtime.typ2Itab   ˆ  Rtype.*github.com/beego/bee/utils.DocValue     type.flag.Value   ¶  ngo.itab.*github.com/beego/bee/utils.DocValue.flag.Value   Ê   runtime.typ2Itab   „  Rtype.*github.com/beego/bee/utils.DocValue   š  type.flag.Value   ²  ngo.itab.*github.com/beego/bee/utils.DocValue.flag.Value   Æ   runtime.typ2Itab   ä  0runtime.morestack_noctxt    Ğ  
-"".autotmp_0005  type.*uint8 "".autotmp_0004  type.*uint8 "".autotmp_0002  Rtype.*github.com/beego/bee/utils.DocValue "".autotmp_0001  Rtype.*github.com/beego/bee/utils.DocValue "".autotmp_0000 /Rtype.*github.com/beego/bee/utils.DocValue "ĞÅÏĞÔÏ À >^>Š>>>  “ĞCš TgclocalsÂ·7d2d5fca80364273fb07d5820a76fef4 TgclocalsÂ·7f1e9457ccdd59eb521cbcc8eefe7f0f   ¤/home/jeff/MBCG-BE-Location/src/github.com/beego/bee/cmd/commands/server/server.goş"".createAPI  à  àdH‹%    H„$0ÿÿÿH;A†ü  HìP  H‹Œ$h  Hƒù Ş  H‹¬$p  H‰ËHƒù‚Â  HÿËHÿÍL‹„$`  Hƒı tIƒÀH‰ÚH‹œ$X  H‰$Hƒ<$ „„  Hƒ$@L‰„$  L‰D$H‰”$  H‰T$H‰¬$  H‰l$è    H‹D$ H‹L$(H‰L$xH‰D$pHƒø t>H‰$H‹X ÿÓH‹L$H‹D$H‹    H‰$H‰Œ$à   H‰L$H‰„$è   H‰D$è    H‹    Hƒû uH    H‰    HÇ    	   H‹    Hƒû uH    H‰    HÇ       H‹    Hƒû u9è    H‹$H‹D$H‰„$˜   H‰    H‰Œ$   €=     …V  H‰    1ÛH‰œ$   H‰œ$(  H‰œ$0  H‰œ$8  H‰œ$@  H‰œ$H  Hœ$   Hƒû „  HÇ„$ø      HÇ„$      H‰œ$ğ   H    H‰$H    H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$ğ   H‰Œ$À   H‰H‰„$È   €=     …v  H‰CH    H‰$H    H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$ğ   HƒÃH‰Œ$À   H‰H‰„$È   €=     …   H‰CH    H‰$H    H‰\$HÇD$    è    H‹L$H‹D$ H‹œ$ğ   HƒÃ H‰Œ$À   H‰H‰„$È   €=     …Š  H‰CH‹    H‰$H    H‰\$HÇD$,   H‹œ$ğ   H‰\$H‹œ$ø   H‰\$ H‹œ$   H‰\$(è    H‹    H‰œ$Ğ   H‹    H‰œ$Ø   H    H‰$H    H‰\$H    H‰\$Hœ$Ğ   H‰\$HÇD$     è    H‹L$(H‹D$0H‰Œ$°   H‰L$`H‰„$¸   H‰D$h1ÛH‰\$PH‰\$XH    H‰$è    H‹D$H‰D$HH‹l$`H‰(H‹l$h€=     …^  H‰hH‰D$HH‹    1íH9è„  H‹L$HH‰„$    H‰D$PH‰Œ$¨   H‰L$XHÇ$    H‹    H‰\$H‹    H‰\$H    H‰\$HÇD$    H‹    H‰\$(H‹    H‰\$0è    H\$8H‹H‰$H‹KH‰L$H‹\$PH‰\$H‹\$XH‰\$è    H‹D$ H‹L$(Hƒø tNH‰Œ$ˆ   H‰$H‰„$€   H‹X ÿÓH‹L$H‹D$H‹    H‰$H‰Œ$à   H‰L$H‰„$è   H‰D$è    HÇ„$x      HÄP  ÃH    H‰$H    H‰\$H    H‰\$è    H‹D$é½şÿÿL@L‰$H‰l$è    H‹D$HéŠşÿÿLCL‰$H‰D$è    écıÿÿLCL‰$H‰D$è    éíüÿÿLCL‰$H‰D$è    éwüÿÿ‰éõûÿÿH-    H‰,$H‰L$è    é—ûÿÿ‰%    épúÿÿè    éíúÿÿè    éßùÿÿÌÌÌÌÌÌÌÌÌÌÌÌÌÌÌ‚
-      Ğ  *flag.(*FlagSet).Parse   œ       º  >github.com/beego/bee/logger.Log   €  \github.com/beego/bee/logger.(*BeeLogger).Error    "".a   ¨  *go.string."127.0.0.1"   ¶  "".a   Ä "".a   Ú "".p   ô   go.string."8080"   ‚  "".p    "".p   ¦ "".f   ¼  os.Getwd   ì "".f   ˆ (runtime.writeBarrier   ¤  "".f   ú  Ptype.github.com/beego/bee/utils.DocValue     "".a   ¶  runtime.convT2E   Œ	 (runtime.writeBarrier   °	  Ptype.github.com/beego/bee/utils.DocValue   Æ	  "".p   ì	  runtime.convT2E   Ê
- (runtime.writeBarrier   î
-  Ptype.github.com/beego/bee/utils.DocValue   „  "".f   ª  runtime.convT2E   ˆ (runtime.writeBarrier   ¬  >github.com/beego/bee/logger.Log   Â  pgo.string."Start server on http://%s:%s, static file %s"   ¶  \github.com/beego/bee/logger.(*BeeLogger).Infof   Ä  "".f   â "".f   €  "type.net/http.Dir   –  0type.net/http.FileSystem   ®  Pgo.itab.net/http.Dir.net/http.FileSystem   î  runtime.convT2I   Ü  2type.net/http.fileHandler   î  "runtime.newobject   ¨ (runtime.writeBarrier   Ö  \go.itab.*net/http.fileHandler.net/http.Handler   È  "".a   à "".a   ø  go.string.":"   ¢  "".p   º "".p   Î  *runtime.concatstring3   ª  .net/http.ListenAndServe   ‚          >github.com/beego/bee/logger.Log   æ  \github.com/beego/bee/logger.(*BeeLogger).Error   œ  4type.*net/http.fileHandler   ²  *type.net/http.Handler   Ê  \go.itab.*net/http.fileHandler.net/http.Handler   Ş   runtime.typ2Itab   –  .runtime.writebarrierptr   Î  .runtime.writebarrierptr   ü  .runtime.writebarrierptr   ª  .runtime.writebarrierptr   Ğ  "".f   ì  .runtime.writebarrierptr   ˜  $runtime.panicslice   °  0runtime.morestack_noctxt   P   *"".autotmp_0030 ß*type.net/http.Handler "".autotmp_0029 4type.*net/http.fileHandler "".autotmp_0028 ¿0type.net/http.FileSystem "".autotmp_0027  "type.interface {} "".autotmp_0026  "type.interface {} "".autotmp_0025 Ÿ"type.interface {} "".autotmp_0024 _(type.[3]interface {} "".autotmp_0021 ¿&type.[]interface {} "".autotmp_0020  type.string "".autotmp_0019  4type.*net/http.fileHandler "".autotmp_0018 ÿ"type.net/http.Dir "".autotmp_0017 ßtype.string "".autotmp_0016 type.[]string "".~r0 ÿ*type.net/http.Handler  net/http.rootÂ·2 ß0type.net/http.FileSystem "".err Ÿtype.error "".cwd ÿtype.string "".err ¿type.error "".~r2 @type.int "".args type.[]string "".cmd  ^type.*github.com/beego/bee/cmd/commands.Command "" ¨
-Ÿ ÌŸ ° hl*
-‡>+É„NNL
- 8 §óÀ\@°.š8O; TgclocalsÂ·47e744d05637aa546b45723fe9d2d977 TgclocalsÂ·b0e8bdc302b9bb162bc7cb5a58cf14a1   ¤/home/jeff/MBCG-BE-Location/src/github.com/beego/bee/cmd/commands/server/server.goş"".glob.func1  @  @dH‹%    H;avè    Ãè    ëäÌÌÌÌ
-         €github.com/beego/bee/cmd/commands/version.ShowShortVersionBanner   ,  0runtime.morestack_noctxt   @   "".args type.[]string "".cmd  ^type.*github.com/beego/bee/cmd/commands.Command     J  
-  TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ¤/home/jeff/MBCG-BE-Location/src/github.com/beego/bee/cmd/commands/server/server.goş"".init  à  àdH‹%    H;avR¶    €û t¶    €ûuÃè    Æ    è    è    è    è    è    è    è    Æ    Ãè    ë˜ÌÌÌÌÌÌÌÌ
-      $  "".initdoneÂ·   <  "".initdoneÂ·   R  "runtime.throwinit   b "".initdoneÂ·   n  net/http.init   x  @github.com/beego/bee/logger.init   ‚  os.init   Œ  Lgithub.com/beego/bee/cmd/commands.init   –  \github.com/beego/bee/cmd/commands/version.init      >github.com/beego/bee/utils.init   ª  "".init.1   ¶ "".initdoneÂ·   Ä  0runtime.morestack_noctxt        p p šp 
- (H TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ¤/home/jeff/MBCG-BE-Location/src/github.com/beego/bee/cmd/commands/server/server.goş4type..hash.[3]interface {}     dH‹%    H;avpHƒì(H‹L$81ÀHÇD$   H‹l$H9è}DH‰D$ H‹\$0Hƒû t>H‰ÅHÁåHëH‰$H‰L$8H‰L$è    H‹L$H‹D$ HÿÀH‹l$H9è|¼H‰L$@HƒÄ(Ã‰ë¾è    éwÿÿÿÌÌÌÌÌÌÌ
-      ¬  (runtime.nilinterhash   €  0runtime.morestack_noctxt   0P  
-"".autotmp_0035 type.int "".autotmp_0034 type.int "".~r2  type.uintptr "".h type.uintptr "".p  *type.*[3]interface {} PgOPO   
- U; TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ¤/home/jeff/MBCG-BE-Location/src/github.com/beego/bee/cmd/commands/server/server.goş0type..eq.[3]interface {} à  àdH‹%    H;a†Î   HƒìX1ÀHÇD$(   H‹l$(H9è’   H‰D$0H‹\$hHƒû „–   H‰ÅHÁåHëH‹H‹sH‹\$`Hƒû tvH‰ÅHÁåHëH‹H‹SH9ÈuVH‰D$8H‰$H‰T$@H‰T$H‰L$HH‰L$H‰t$PH‰t$è    ¶\$ €û t H‹D$0HÿÀH‹l$(H9èŒnÿÿÿÆD$pHƒÄXÃÆD$p HƒÄXÃ‰ë†‰écÿÿÿè    éÿÿÿÌÌÌÌÌ
-      ¼  runtime.efaceeq   Ä  0runtime.morestack_noctxt   0°  "".autotmp_0039 ?"type.interface {} "".autotmp_0038 "type.interface {} "".autotmp_0037 _type.int "".autotmp_0036 Otype.int "".~r2  type.bool "".q *type.*[3]interface {} "".p  *type.*[3]interface {} ,°´¯°	¯°¯ ğ ğ  S TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   ¤/home/jeff/MBCG-BE-Location/src/github.com/beego/bee/cmd/commands/server/server.goş>ngo.itab.*github.com/beego/bee/utils.DocValue.flag.Value     ş"go.string.hdr."a"                       go.string."a"   şgo.string."a"   a  ş<go.string.hdr."Listen address"                       4go.string."Listen address"   ş4go.string."Listen address"    Listen address  ş"go.string.hdr."p"                       go.string."p"   şgo.string."p"   p  ş6go.string.hdr."Listen port"                       .go.string."Listen port"   ş.go.string."Listen port"    Listen port  ş"go.string.hdr."f"                       go.string."f"   şgo.string."f"   f  şBgo.string.hdr."Static files fold"                       :go.string."Static files fold"   ş:go.string."Static files fold" 0  $Static files fold  şTgclocalsÂ·7f1e9457ccdd59eb521cbcc8eefe7f0f (  (                 şTgclocalsÂ·7d2d5fca80364273fb07d5820a76fef4           ş>Pgo.itab.net/http.Dir.net/http.FileSystem     ş>\go.itab.*net/http.fileHandler.net/http.Handler     ş2go.string.hdr."127.0.0.1"             	          *go.string."127.0.0.1"   ş*go.string."127.0.0.1"    127.0.0.1  ş(go.string.hdr."8080"                        go.string."8080"   ş go.string."8080"   
-8080  şxgo.string.hdr."Start server on http://%s:%s, static file %s"             ,          pgo.string."Start server on http://%s:%s, static file %s"   şpgo.string."Start server on http://%s:%s, static file %s" `  ZStart server on http://%s:%s, static file %s  ş"go.string.hdr.":"                       go.string.":"   şgo.string.":"   :  şTgclocalsÂ·b0e8bdc302b9bb162bc7cb5a58cf14a1 €  €   !              ø      ø     ø     ø     ø     ø    şTgclocalsÂ·47e744d05637aa546b45723fe9d2d977 H  H                            şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             ş:go.string.hdr."server [port]"                       2go.string."server [port]"   ş2go.string."server [port]"    server [port]  şpgo.string.hdr."serving static content over HTTP on port"             (          hgo.string."serving static content over HTTP on port"   şhgo.string."serving static content over HTTP on port" `  Rserving static content over HTTP on port  ş–go.string.hdr."\n  The command 'server' creates a Beego API application.\n"             9          go.string."\n  The command 'server' creates a Beego API application.\n"   şgo.string."\n  The command 'server' creates a Beego API application.\n" €  t
-  The command 'server' creates a Beego API application.
-  şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           ş<"".CmdServer  ^type.*github.com/beego/bee/cmd/commands.Command            """.statictmp_0033   ş<"".a   Ptype.github.com/beego/bee/utils.DocValue   ş<"".p   Ptype.github.com/beego/bee/utils.DocValue   ş<"".f   Ptype.github.com/beego/bee/utils.DocValue   ş<""".statictmp_0033  à\type.github.com/beego/bee/cmd/commands.Command €                                       (               9       
-   2go.string."server [port]"   @  hgo.string."serving static content over HTTP on port"   `  go.string."\n  The command 'server' creates a Beego API application.\n"      "".glob.func1Â·f      "".createAPIÂ·f   ş>"".initdoneÂ·  type.uint8   ş"".init.1Â·f              "".init.1   ş"".createAPIÂ·f              "".createAPI   ş "".glob.func1Â·f              "".glob.func1   ş"".initÂ·f              "".init   ş"runtime.gcbits.01    şFgo.string.hdr."[]*commands.Command"                       >go.string."[]*commands.Command"   ş>go.string."[]*commands.Command" 0  ([]*commands.Command  şbtype.[]*github.com/beego/bee/cmd/commands.Command                  æˆ                                                 
-0   runtime.algarray   @  "runtime.gcbits.01   P  Fgo.string.hdr."[]*commands.Command"   p  tgo.weak.type.*[]*github.com/beego/bee/cmd/commands.Command   €  ^type.*github.com/beego/bee/cmd/commands.Command   ş˜go.typelink.[]*commands.Command	[]*github.com/beego/bee/cmd/commands.Command              btype.[]*github.com/beego/bee/cmd/commands.Command   ş0go.string.hdr."[]string"                       (go.string."[]string"   ş(go.string."[]string"    []string  ştype.[]string                 Ó¨ó
-                                                 
-0   runtime.algarray   @  "runtime.gcbits.01   P  0go.string.hdr."[]string"   p  ,go.weak.type.*[]string   €  type.string   ş:go.typelink.[]string	[]string              type.[]string   ş"runtime.gcbits.03    ş8go.string.hdr."interface {}"                       0go.string."interface {}"   ş0go.string."interface {}"    interface {}  ş"type.interface {} °  °              çW                                                                  
-0€  runtime.algarray   @  "runtime.gcbits.03   P  8go.string.hdr."interface {}"   p  4go.weak.type.*interface {}   €° "type.interface {}   ş<go.string.hdr."[]interface {}"                       4go.string."[]interface {}"   ş4go.string."[]interface {}"    []interface {}  ş&type.[]interface {}                 p“ê/                                                 
-0   runtime.algarray   @  "runtime.gcbits.01   P  <go.string.hdr."[]interface {}"   p  8go.weak.type.*[]interface {}   €  "type.interface {}   şRgo.typelink.[]interface {}	[]interface {}              &type.[]interface {}   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş<type..hashfunc.[3]interface {}              4type..hash.[3]interface {}   ş8type..eqfunc.[3]interface {}              0type..eq.[3]interface {}   ş2type..alg.[3]interface {}                        <type..hashfunc.[3]interface {}     8type..eqfunc.[3]interface {}   ş"runtime.gcbits.3f   ? ş>go.string.hdr."[3]interface {}"                       6go.string."[3]interface {}"   ş6go.string."[3]interface {}"     [3]interface {}  ş(type.[3]interface {} °  °0       0       İÏÙ                                                                0  2type..alg.[3]interface {}   @  "runtime.gcbits.3f   P  >go.string.hdr."[3]interface {}"   p  :go.weak.type.*[3]interface {}   €  "type.interface {}     &type.[]interface {}   şVgo.typelink.[3]interface {}	[3]interface {}              (type.[3]interface {}   ş@go.string.hdr."*[3]interface {}"                       8go.string."*[3]interface {}"   ş8go.string."*[3]interface {}" 0  "*[3]interface {}  ş*type.*[3]interface {}                 °ş¹ 6                                                
-0   runtime.algarray   @  "runtime.gcbits.01   P  @go.string.hdr."*[3]interface {}"   p  <go.weak.type.**[3]interface {}   €  (type.[3]interface {}   ş0go.string.hdr."net/http"                       (go.string."net/http"   ş(go.string."net/http"    net/http  ş.go.importpath.net/http.                       (go.string."net/http"   ş$go.string.hdr."os"                       go.string."os"   şgo.string."os"   os  ş"go.importpath.os.                       go.string."os"   şVgo.string.hdr."github.com/beego/bee/logger"                       Ngo.string."github.com/beego/bee/logger"   şNgo.string."github.com/beego/bee/logger" @  8github.com/beego/bee/logger  şTgo.importpath.github.com/beego/bee/logger.                       Ngo.string."github.com/beego/bee/logger"   şbgo.string.hdr."github.com/beego/bee/cmd/commands"             !          Zgo.string."github.com/beego/bee/cmd/commands"   şZgo.string."github.com/beego/bee/cmd/commands" P  Dgithub.com/beego/bee/cmd/commands  ş`go.importpath.github.com/beego/bee/cmd/commands.             !          Zgo.string."github.com/beego/bee/cmd/commands"   şTgo.string.hdr."github.com/beego/bee/utils"                       Lgo.string."github.com/beego/bee/utils"   şLgo.string."github.com/beego/bee/utils" @  6github.com/beego/bee/utils  şRgo.importpath.github.com/beego/bee/utils.                       Lgo.string."github.com/beego/bee/utils"   şrgo.string.hdr."github.com/beego/bee/cmd/commands/version"             )          jgo.string."github.com/beego/bee/cmd/commands/version"   şjgo.string."github.com/beego/bee/cmd/commands/version" `  Tgithub.com/beego/bee/cmd/commands/version  şpgo.importpath.github.com/beego/bee/cmd/commands/version.             )          jgo.string."github.com/beego/bee/cmd/commands/version"   ş:type..hash.[3]interface {}Â·f              4type..hash.[3]interface {}   ş6type..eq.[3]interface {}Â·f              0type..eq.[3]interface {}   ÿÿgo13ld
